@@ -19,6 +19,7 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccessibilityIcon from '@mui/icons-material/Accessibility';
 import PeopleIcon from '@mui/icons-material/People';
+import SchoolIcon from '@mui/icons-material/School';
 
 const drawerWidth = 240;
 
@@ -27,9 +28,9 @@ const menuItems = [
   { text: 'Upload CSV', icon: <UploadFileIcon />, path: '/upload' },
   { text: 'Reports', icon: <AssessmentIcon />, path: '/reports' },
   { text: 'Configuration', icon: <SettingsIcon />, path: '/configuration' },
-  { text: 'Instructors', icon: <AccessibilityIcon />, path: '/instructors' },
-  { text: 'Students', icon: <PeopleIcon />, path: '/students' }
-
+  { text: 'Instructors Master', icon: <AccessibilityIcon />, path: '/instructors' },
+  { text: 'Students Master', icon: <PeopleIcon />, path: '/students' },
+  { text: 'Class Types Master', icon: <SchoolIcon />, path: '/class-types' }
 ];
 
 function Layout({ children }) {
