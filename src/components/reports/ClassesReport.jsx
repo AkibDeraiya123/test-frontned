@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Paper,
   Box,
@@ -23,7 +23,9 @@ function ClassesReport() {
   const [filters, setFilters] = useState({
     startDate: '',
     endDate: '',
-    instructorId: ''
+    instructorId: '',
+    classTypeId: '',
+    studentId: ''
   });
 
   const [appliedFilters, setAppliedFilters] = useState({});
@@ -32,6 +34,18 @@ function ClassesReport() {
   const { data: instructorsData } = useQuery({
     queryKey: ['instructors'],
     queryFn: () => masterApi.getInstructors()
+  });
+
+  // Get class types for dropdown
+  const { data: classTypesData } = useQuery({
+    queryKey: ['classTypes'],
+    queryFn: () => masterApi.getClassTypes()
+  });
+
+  // Get students for dropdown
+  const { data: studentsData } = useQuery({
+    queryKey: ['students'],
+    queryFn: () => masterApi.getStudents()
   });
 
   // Get filtered classes
@@ -46,12 +60,20 @@ function ClassesReport() {
   };
 
   const handleClearFilters = () => {
-    setFilters({ startDate: '', endDate: '', instructorId: '' });
-    setAppliedFilters({});
+    const clearedFilters = { startDate: '', endDate: '', instructorId: '', classTypeId: '', studentId: '' };
+    setFilters(clearedFilters);
+    setAppliedFilters(clearedFilters);
   };
 
   const instructors = instructorsData?.data || [];
+  const classTypes = classTypesData?.data || [];
+  const students = studentsData?.data || [];
+
   const classes = data?.data || [];
+
+  useEffect(() => {
+    setAppliedFilters(filters);
+  }, []);
 
   return (
     <Box>
@@ -90,6 +112,37 @@ function ClassesReport() {
               </MenuItem>
             ))}
           </TextField>
+
+          <TextField
+            select
+            label="Class Type"
+            value={filters.classTypeId}
+            onChange={(e) => setFilters({ ...filters, classTypeId: e.target.value })}
+            sx={{ minWidth: 200 }}
+          >
+            <MenuItem value="">All Class Types</MenuItem>
+            {classTypes.map((classType) => (
+              <MenuItem key={classType.classTypeId} value={classType.classTypeId}>
+                {classType.name} ({classType.classTypeId})
+              </MenuItem>
+            ))}
+          </TextField>
+
+          <TextField
+            select
+            label="Student"
+            value={filters.studentId}
+            onChange={(e) => setFilters({ ...filters, studentId: e.target.value })}
+            sx={{ minWidth: 200 }}
+          >
+            <MenuItem value="">All Students</MenuItem>
+            {students.map((student) => (
+              <MenuItem key={student.studentId} value={student.studentId}>
+                {student.name} ({student.studentId})
+              </MenuItem>
+            ))}
+          </TextField>
+
           <Button variant="contained" onClick={handleApplyFilters}>
             Apply Filters
           </Button>

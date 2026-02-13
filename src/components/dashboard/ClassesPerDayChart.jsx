@@ -38,7 +38,10 @@ function ClassesPerDayChart() {
   return (
     <Paper sx={{ p: 3 }}>
       <Typography variant="h6" gutterBottom>
-        Classes Per Day (Upcoming 90 Days)
+        Classes Per Day (For Next 90 Days)
+      </Typography>
+      <Typography variant="body2" color="text.secondary" gutterBottom>
+        Note: This chart will update automatically every minute automatically. You don't need to refresh the page manually.
       </Typography>
       {chartData.length === 0 ? (
         <Typography color="text.secondary" sx={{ textAlign: 'center', py: 4 }}>

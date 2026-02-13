@@ -9,7 +9,7 @@ function Reports() {
         Reports
       </Typography>
       <Typography variant="body2" color="text.secondary" gutterBottom sx={{ mb: 3 }}>
-        View and filter class schedules by date and instructor
+        View and filter class schedules by date, instructor, class type and student.
       </Typography>
 
       <ClassesReport />
