@@ -19,12 +19,5 @@ export const uploadApi = {
   getUploadStatus: async (batchId) => {
     const response = await axios.get(`${API_URL}/api/upload/status/${batchId}`);
     return response.data;
-  },
-
-  getUploadHistory: async (page = 1, limit = 20) => {
-    const response = await axios.get(`${API_URL}/api/upload/history`, {
-      params: { page, limit }
-    });
-    return response.data;
   }
 };
