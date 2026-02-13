@@ -6,18 +6,6 @@ export const masterApi = {
     return apiClient.get('/api/masters/students', { params });
   },
 
-  createStudent: async (data) => {
-    return apiClient.post('/api/masters/students', data);
-  },
-
-  updateStudent: async (studentId, data) => {
-    return apiClient.put(`/api/masters/students/${studentId}`, data);
-  },
-
-  deleteStudent: async (studentId) => {
-    return apiClient.delete(`/api/masters/students/${studentId}`);
-  },
-
   // Instructors
   getInstructors: async (params = {}) => {
     return apiClient.get('/api/masters/instructors', { params });

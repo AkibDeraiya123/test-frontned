@@ -9,6 +9,7 @@ import Reports from './pages/Reports';
 import Configuration from './pages/Configuration';
 import Masters from './pages/Masters';
 import Instructors from './pages/Instructors';
+import Students from './pages/Students';
 import { SocketProvider } from './context/SocketContext';
 
 const theme = createTheme({
@@ -37,6 +38,7 @@ function App() {
             <Route path="/configuration" element={<Configuration />} />
             <Route path="/masters" element={<Masters />} />
             <Route path="/instructors" element={<Instructors />} />
+            <Route path="/students" element={<Students />} />
 
           </Routes>
         </Layout>

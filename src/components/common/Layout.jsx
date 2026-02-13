@@ -18,6 +18,7 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccessibilityIcon from '@mui/icons-material/Accessibility';
+import PeopleIcon from '@mui/icons-material/People';
 
 const drawerWidth = 240;
 
@@ -26,7 +27,8 @@ const menuItems = [
   { text: 'Upload CSV', icon: <UploadFileIcon />, path: '/upload' },
   { text: 'Reports', icon: <AssessmentIcon />, path: '/reports' },
   { text: 'Configuration', icon: <SettingsIcon />, path: '/configuration' },
-  { text: 'Instructors', icon: <AccessibilityIcon />, path: '/instructors' }
+  { text: 'Instructors', icon: <AccessibilityIcon />, path: '/instructors' },
+  { text: 'Students', icon: <PeopleIcon />, path: '/students' }
 
 ];
 
