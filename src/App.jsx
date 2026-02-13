@@ -8,6 +8,7 @@ import Upload from './pages/Upload';
 import Reports from './pages/Reports';
 import Configuration from './pages/Configuration';
 import Masters from './pages/Masters';
+import Instructors from './pages/Instructors';
 import { SocketProvider } from './context/SocketContext';
 
 const theme = createTheme({
@@ -35,6 +36,8 @@ function App() {
             <Route path="/reports" element={<Reports />} />
             <Route path="/configuration" element={<Configuration />} />
             <Route path="/masters" element={<Masters />} />
+            <Route path="/instructors" element={<Instructors />} />
+
           </Routes>
         </Layout>
       </SocketProvider>

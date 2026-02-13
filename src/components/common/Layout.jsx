@@ -17,7 +17,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import SettingsIcon from '@mui/icons-material/Settings';
-import PeopleIcon from '@mui/icons-material/People';
+import AccessibilityIcon from '@mui/icons-material/Accessibility';
 
 const drawerWidth = 240;
 
@@ -25,7 +25,9 @@ const menuItems = [
   { text: 'Dashboard', icon: <DashboardIcon />, path: '/dashboard' },
   { text: 'Upload CSV', icon: <UploadFileIcon />, path: '/upload' },
   { text: 'Reports', icon: <AssessmentIcon />, path: '/reports' },
-  { text: 'Configuration', icon: <SettingsIcon />, path: '/configuration' }
+  { text: 'Configuration', icon: <SettingsIcon />, path: '/configuration' },
+  { text: 'Instructors', icon: <AccessibilityIcon />, path: '/instructors' }
+
 ];
 
 function Layout({ children }) {

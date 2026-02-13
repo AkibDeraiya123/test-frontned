@@ -23,18 +23,6 @@ export const masterApi = {
     return apiClient.get('/api/masters/instructors', { params });
   },
 
-  createInstructor: async (data) => {
-    return apiClient.post('/api/masters/instructors', data);
-  },
-
-  updateInstructor: async (instructorId, data) => {
-    return apiClient.put(`/api/masters/instructors/${instructorId}`, data);
-  },
-
-  deleteInstructor: async (instructorId) => {
-    return apiClient.delete(`/api/masters/instructors/${instructorId}`);
-  },
-
   // Class Types
   getClassTypes: async (params = {}) => {
     return apiClient.get('/api/masters/class-types', { params });
