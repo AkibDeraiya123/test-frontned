@@ -11,7 +11,7 @@ import Masters from './pages/Masters';
 import Instructors from './pages/Instructors';
 import Students from './pages/Students';
 import ClassTypes from './pages/ClassTypes';
-import { SocketProvider } from './context/SocketContext';
+
 
 const theme = createTheme({
   palette: {
@@ -29,7 +29,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <SocketProvider>
+
         <Layout>
           <Routes>
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
@@ -43,7 +43,7 @@ function App() {
             <Route path="/class-types" element={<ClassTypes />} />
           </Routes>
         </Layout>
-      </SocketProvider>
+
     </ThemeProvider>
   );
 }
