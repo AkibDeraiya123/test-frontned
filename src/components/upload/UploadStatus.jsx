@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Paper,
   Box,
@@ -13,19 +13,46 @@ function UploadStatus({ batchId, onComplete }) {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const onCompleteRef = useRef(onComplete);
+  const latestStatusRef = useRef(null);
+  const intervalRef = useRef(null);
+  const completedFollowUpTimeoutRef = useRef(null);
+  const pendingCompletedFollowUpRef = useRef(false);
+
+  onCompleteRef.current = onComplete;
+  latestStatusRef.current = status;
+
   useEffect(() => {
     if (!batchId) return;
 
     const checkStatus = async () => {
       try {
         const result = await uploadApi.getUploadStatus(batchId);
-        setStatus(result.data);
+        const data = result.data;
+        latestStatusRef.current = data;
+        setStatus(data);
         setLoading(false);
 
-        if (result.data.status === 'completed' || result.data.status === 'failed') {
-          if (onComplete) {
-            onComplete(result.data);
+        if (data.status === 'completed' || data.status === 'failed') {
+          if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
           }
+
+          if (data.status === 'completed' && !pendingCompletedFollowUpRef.current) {
+            // One more check after 3s so we get all records before calling onComplete
+            pendingCompletedFollowUpRef.current = true;
+            completedFollowUpTimeoutRef.current = setTimeout(() => {
+              completedFollowUpTimeoutRef.current = null;
+              checkStatus();
+            }, 2000);
+          } else {
+            if (pendingCompletedFollowUpRef.current) {
+              pendingCompletedFollowUpRef.current = false;
+            }
+            onCompleteRef.current?.(data);
+          }
+          return;
         }
       } catch (error) {
         setLoading(false);
@@ -35,17 +62,30 @@ function UploadStatus({ batchId, onComplete }) {
     // Check immediately
     checkStatus();
 
-    // Poll every 2 seconds while processing
-    const interval = setInterval(() => {
-      if (status?.status === 'processing') {
+    // Poll every 2 seconds only while still processing
+    intervalRef.current = setInterval(() => {
+      if (latestStatusRef.current?.status === 'processing') {
         checkStatus();
       } else {
-        clearInterval(interval);
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+          intervalRef.current = null;
+        }
       }
     }, 2000);
 
-    return () => clearInterval(interval);
-  }, [batchId, status?.status, onComplete]);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+      if (completedFollowUpTimeoutRef.current) {
+        clearTimeout(completedFollowUpTimeoutRef.current);
+        completedFollowUpTimeoutRef.current = null;
+      }
+      pendingCompletedFollowUpRef.current = false;
+    };
+  }, [batchId]);
 
   if (loading) {
     return (

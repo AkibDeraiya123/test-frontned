@@ -29,7 +29,6 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-
         <Layout>
           <Routes>
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
@@ -43,7 +42,6 @@ function App() {
             <Route path="/class-types" element={<ClassTypes />} />
           </Routes>
         </Layout>
-
     </ThemeProvider>
   );
 }

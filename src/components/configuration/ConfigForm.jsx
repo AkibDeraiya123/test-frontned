@@ -95,6 +95,20 @@ function ConfigForm() {
       description: 'Automatically add new student IDs found in CSV uploads',
       type: 'boolean',
       category: 'Features'
+    },
+    {
+      key: 'enable_instructor_auto_add',
+      label: 'Enable Instructor Auto-Add',
+      description: 'Automatically add new instructor IDs found in CSV uploads',
+      type: 'boolean',
+      category: 'Features'
+    },
+    {
+      key: 'enable_class_type_auto_add',
+      label: 'Enable classType Auto-Add',
+      description: 'Automatically add new classType IDs found in CSV uploads',
+      type: 'boolean',
+      category: 'Features'
     }
   ];
 
